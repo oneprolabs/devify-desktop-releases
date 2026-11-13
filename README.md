@@ -1,23 +1,26 @@
-# AIMyChats releases
+# AIMyChats 发布仓库
 
-Build artifacts for **AIMyChats**, the local-first WeChat desktop client from
-[`oneprolabs/devify-desktop`](https://github.com/oneprolabs/devify-desktop).
+AIMyChats 的安装包与更新清单。源代码、issue 和 PR 在私有源仓库维护，这里只存放可下载的构建产物。
 
-This repository holds release assets only. Source code, issues and pull requests live in the
-private source repository.
+## 发布通道
 
-## Releases
+- **`alpha`** — 滚动预发布通道，应用内更新默认读取这里。包含签名后的 macOS 应用、更新归档（`.app.tar.gz`）、签名文件（`.sig`）和更新清单 `latest.json`。
+- **`v*`** — 里程碑版本，供手动下载安装。
 
-- **`alpha`** — the rolling prerelease consumed by the in-app updater. It contains the signed
-  macOS app, the updater archive (`.app.tar.gz`), its `.sig`, and `latest.json`.
-- **`v*`** — milestone builds published for manual installation.
+## 下载与安装
 
-Release assets are produced by `.github/workflows/release-macos.yml` in the source repository.
+1. 在目标版本下下载 DMG。
+2. 首次打开会被 macOS Gatekeeper 拦截（应用未公证）：在 Finder 里右键点击 `AIMyChats.app` → **打开**，再确认一次。
+3. 授予 **完全磁盘访问权限**：系统设置 → 隐私与安全性 → 完全磁盘访问权限，添加 `AIMyChats.app`。读取本机微信数据库必须要有这项授权。
 
-## Installing
+已安装的用户无需重复下载，应用会在启动时通过 `alpha` 通道检查更新。
 
-1. Download the DMG from the desired release.
-2. macOS Gatekeeper blocks the first launch because the app is not notarised: Control-click the
-   app → **Open**, then confirm.
-3. Grant **Full Disk Access** to `AIMyChats.app` in System Settings → Privacy & Security before
-   reading local WeChat databases.
+## 版本说明
+
+每个版本的发布说明只描述该版本更新了什么（新功能、体验调整、问题修复）。
+
+## 支持环境
+
+- macOS Apple Silicon（aarch64）
+- 签名：自签名 `AIMyChats Local Signing`，未公证
+- 数据只在本机处理；上传到服务端的内容由用户在应用内逐次确认
